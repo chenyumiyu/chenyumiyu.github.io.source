@@ -11,8 +11,8 @@ archives: "2019-05"
     
 ### 1.github
 
-    全球程序最大同性交友网站，代码搬运的不二之选，程序猿的必备工具之一。
-    本文中最重要的目的是进行代码的版本控制和博客内容的存放。
+全球程序最大同性交友网站，代码搬运的不二之选，程序猿的必备工具之一。
+本文中最重要的目的是进行代码的版本控制和博客内容的存放。
 
 - [github 帐号注册](https://github.com/)
 - [git安装](https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git)
@@ -27,8 +27,8 @@ archives: "2019-05"
 
 ### 3.hexo
 
-    Hexo是一款基于Node.js的静态博客框架，依赖少易于安装使用，可以生成静态网页直接托管在
-    github和heroku上。
+Hexo是一款基于Node.js的静态博客框架，依赖少易于安装使用，可以生成静态网页直接托管在
+github和heroku上。
 
 - hexo安装: npm install -g hexo-cli
 - hexo创建blog: hexo init blog
@@ -105,9 +105,9 @@ deploy:
 
 ### 6.Appveyor进行hexo博客持续集成（注意： 需要科学上网）
 
-    有了源代码管理了，可以在不同的电脑进行blog编写了，但是如果只是下载下来了hexo的源代码版本库，
-    难道又要重新走一边在上面的流程嘛？Appveyor就是这样的一个平台，监控你的源博客提交，并自动部署。
-    当然它的功能不知如此，有兴趣的可以深入研究。
+有了源代码管理了，可以在不同的电脑进行blog编写了，但是如果只是下载下来了hexo的源代码版本库，
+难道又要重新走一边在上面的流程嘛？Appveyor就是这样的一个平台，监控你的源博客提交，并自动部署。
+当然它的功能不知如此，有兴趣的可以深入研究。
     
 - [Appveyor官网](https://www.appveyor.com/docs/)
 - 登录： 直接使用github帐号登录
@@ -146,6 +146,7 @@ on_success:
   - git add -A
   - if "%APPVEYOR_REPO_BRANCH%"=="master" if not defined APPVEYOR_PULL_REQUEST_NUMBER (git diff --quiet --exit-code --cached || git commit -m "Update Static Site" && git push origin %TARGET_BRANCH% && appveyor AddMessage "Static Site Updated")
 ```
+- [appveyorKey生成](https://ci.appveyor.com/tools/encrypt)
 - 持续集成： git clone 你的hexo博客源代码仓库，直接在source下新建相关文件，然后再提交到github远程仓库就可以了，appveyor会自动监控并且部署
 - 新建blog：
     - 直接复制原有的博客，然后修改名字就可以了
