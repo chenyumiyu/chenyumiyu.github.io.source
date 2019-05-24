@@ -17,9 +17,13 @@ archives: "2019-05"
 
 ## 5.创建blog仓库
 
+## 6.appvor进行版本控制和持续集成
+
 # 坑
 
 ## 1.github can not find tags(categories or ...)
+## 2.github生成personal key在appvor使用中遇到的坑
+## 3.hexo设置语言
 
 # 参考
 
