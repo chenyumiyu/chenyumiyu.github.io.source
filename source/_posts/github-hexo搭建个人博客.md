@@ -5,9 +5,12 @@ tags: blog
 categories: "tool"
 archives: "2019-05"
 ---
+使用github+hexo搭建个人blog，并使用appveor进行版本控制和持续集成。
 # 基础
 
-## 1.github仓库创建
+## 1.github仓库
+
+- [github 帐号注册](https://github.com/)
 
 ## 2.node.js安装
 
@@ -19,11 +22,15 @@ archives: "2019-05"
 
 ## 6.appvor进行版本控制和持续集成
 
+## 7.允许搜索引擎（google or baidu）收录
+
 # 坑
 
+## 1.域名映射
 ## 1.github can not find tags(categories or ...)
 ## 2.github生成personal key在appvor使用中遇到的坑
 ## 3.hexo设置语言
+
 
 # 参考
 
