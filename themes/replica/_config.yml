@@ -1,0 +1,32 @@
+# left-side user profile
+
+# by default https://octodex.github.com/images/baracktocat.jpg
+avatar: /tangpuseng.jpg
+location: Shenzhen, China
+email: zhaochangzhong0@gmail.com
+social:
+  github: https://github.com/chenyumiyu
+
+# navbar menu
+menu:
+ # archives: true
+ # tags: true
+ # categories: true
+ # hexo new page tags(archives and archives), and set other url
+ home: /
+ archives: /archives
+ tags: /tags
+ categories: /categories
+
+
+rss_dir: atom.xml
+
+# widget
+ga: # google analytics tracking code UA-XXXXXXX-X
+baidutongji: # baidutongji tracking code
+duoshuo: # duoshuo username
+gsc: # google custom search code
+
+# flagcounter
+flagcounter_href: # https://info.flagcounter.com/xxxx
+flagcounter_img_src: # https://s01.flagcounter.com/xxxx
