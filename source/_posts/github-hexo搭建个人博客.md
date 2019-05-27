@@ -94,7 +94,7 @@ deploy:
     
 ### 4.hexo+git工具安装
 
-    Hexo此时创建的blog只能在本地运行，不能外网访问的blog还有啥意义呢
+Hexo此时创建的blog只能在本地运行，不能外网访问的blog还有啥意义呢
 
 - npm install hexo-deployer-git --save: hexo部署到git工具安装 
 - hexo clean: 清除缓存
