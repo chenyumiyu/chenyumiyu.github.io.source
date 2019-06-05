@@ -6,9 +6,9 @@ categories: "tool"
 archives: "2019-06"
 ---
 
-#一 基础
+# 一 基础
 
-##1.1 概念
+## 1.1 概念
 
 - 官方概念:
 类比大货轮(生产环境:ubuntu centos)上的集装箱,集装箱可以将化学品 食物 玩具等等一个个独立分割(即可以满足不同版本的tensorflow版本模型),只需要一艘货轮就可以运送食物 化学品等,并且在同一艘大货轮中可以一直持续的增加集装箱,并且进行统一管理(消耗低 通信方便)
@@ -22,7 +22,7 @@ archives: "2019-06"
         - 构建三个docker容器, 指定相关端口进行通讯, 直接集成所有算法
     - 解决方案: docker 大法好, 下载相关的docker镜像, 运行镜像创建环境, 直接保证无痛运行
 
-##1.2 容器
+## 1.2容器
 **不虚拟化操作内核, 只虚拟化相关操作系统接口**
 概念
 - 一种虚拟化方案
@@ -35,10 +35,10 @@ archives: "2019-06"
 - 资源占用小
 - 对CPU 内存资源消耗小
 
-##1.3 框架图
+## 1.3框架图
 wKiom1jCbLPTOe1iAAERmX6iMrE621.png
 
-##1.4 安装
+## 1.4安装
 
 - 主要系统安装(google 搜索以下关键字)
     - [ubuntu18 install docker](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04)
@@ -60,9 +60,9 @@ wKiom1jCbLPTOe1iAAERmX6iMrE621.png
 }
 ```
 
-#二 Docker
+# 二 Docker
 
-## 2.1 基础命令
+## 2.1基础命令
 - Dockerfile: (相关命令, 构建镜像)
 - image(镜像):
     - docker image ls: 显示当前镜像
@@ -78,7 +78,7 @@ wKiom1jCbLPTOe1iAAERmX6iMrE621.png
         1. docker ps : 查看当前运行容器id
         1. 需要在当前未退出容器的基础上, 打开另外一个shell界面, 保存当前容器为新镜像
 
-## 2.2 常用操作
+## 2.2常用操作
 
 - 常用操作:
     - docker run -it 镜像名 bash: 运行镜像并进入bash界面
@@ -93,7 +93,7 @@ wKiom1jCbLPTOe1iAAERmX6iMrE621.png
 - 保存及备份操作:
         
 
-#参考
+# 参考
 
 1. [如何通俗易懂的说明docker](https://www.zhihu.com/search?type=content&q=docker)
 1. [docker 从入门到实践](https://yeasy.gitbooks.io/docker_practice/network/port_mapping.html)
