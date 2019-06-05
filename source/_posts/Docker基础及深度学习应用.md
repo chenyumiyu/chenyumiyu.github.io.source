@@ -5,10 +5,12 @@ tags: Docker
 categories: "tool"
 archives: "2019-06"
 ---
+使用Docker进行环境管理， 包含Docker的基础操作和深度学习应用。
 
-# 一 基础
 
-## 1.1 概念
+# 一、基础
+
+## 1.1概念
 
 - 官方概念:
 类比大货轮(生产环境:ubuntu centos)上的集装箱,集装箱可以将化学品 食物 玩具等等一个个独立分割(即可以满足不同版本的tensorflow版本模型),只需要一艘货轮就可以运送食物 化学品等,并且在同一艘大货轮中可以一直持续的增加集装箱,并且进行统一管理(消耗低 通信方便)
@@ -23,6 +25,7 @@ archives: "2019-06"
     - 解决方案: docker 大法好, 下载相关的docker镜像, 运行镜像创建环境, 直接保证无痛运行
 
 ## 1.2容器
+
 **不虚拟化操作内核, 只虚拟化相关操作系统接口**
 概念
 - 一种虚拟化方案
@@ -36,6 +39,7 @@ archives: "2019-06"
 - 对CPU 内存资源消耗小
 
 ## 1.3框架图
+
 wKiom1jCbLPTOe1iAAERmX6iMrE621.png
 
 ## 1.4安装
@@ -63,6 +67,7 @@ wKiom1jCbLPTOe1iAAERmX6iMrE621.png
 # 二 Docker
 
 ## 2.1基础命令
+
 - Dockerfile: (相关命令, 构建镜像)
 - image(镜像):
     - docker image ls: 显示当前镜像
@@ -91,7 +96,6 @@ wKiom1jCbLPTOe1iAAERmX6iMrE621.png
     - [Nvidia docker GPU加速docker](https://github.com/NVIDIA/nvidia-docker)
     - [depo-国人一站式深度学习docker仓库](https://hub.docker.com/r/ufoym/deepo)
 - 保存及备份操作:
-        
 
 # 参考
 
