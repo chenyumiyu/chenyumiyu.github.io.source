@@ -55,14 +55,14 @@ wKiom1jCbLPTOe1iAAERmX6iMrE621.png
         - sudo usermod -aG docker your_username
         - 设置完毕后需要重新登录该用户才能通过不加sudo直接使用docker
     - 修改docker **image**仓库
-```
-#对于使用 systemd 的系统，请在 /etc/docker/daemon.json 中写入如下内容（如果文件不存在请新建该文件）
-{
-  "registry-mirrors": [
-    "https://registry.docker-cn.com"
-  ]
-}
-```
+    ```
+    #对于使用 systemd 的系统，请在 /etc/docker/daemon.json 中写入如下内容（如果文件不存在请新建该文件）
+    {
+      "registry-mirrors": [
+        "https://registry.docker-cn.com"
+      ]
+    }
+    ```
 
 # 二 Docker
 
@@ -82,6 +82,7 @@ wKiom1jCbLPTOe1iAAERmX6iMrE621.png
     - docker commit -m="modify msg" -a="author" containerId imageName
         1. docker ps : 查看当前运行容器id
         1. 需要在当前未退出容器的基础上, 打开另外一个shell界面, 保存当前容器为新镜像
+    - docker exec -it 容器id bash: 进入正在运行中的容器
 
 ## 2.2常用操作
 
@@ -92,10 +93,18 @@ wKiom1jCbLPTOe1iAAERmX6iMrE621.png
         - -p: 指定网络端口进行通信
         - -v: 指定共享文件夹
     - **CTRL + P +Q: 退出容器但保证后台运行**
+         - 有时会直接失效, 替代方法, 以开始就保持容器后台运行, 然后通过进入正在运行的docker容器去部署持久化应用
+    - docker run -dit 镜像名 /bin/bash: 保证容器的后台运行, 并且使用exit时不会退出容器, 需要使用 容器的 stop方式停止
+        - -d: 表示守护态运行容器
+        - --restart always: 表示随服务器开机自启动
+    - docker container stop 容器id: 停止各种守护态\后台运行等状态容器
+- 保存及备份操作:
+    - docker save -o 备份镜像保存路径 镜像名
+    - docker load -i 备份镜像路径
+    - 提交个人镜像到docker官方仓库(类似github): **todo**
 - 常用仓库:
     - [Nvidia docker GPU加速docker](https://github.com/NVIDIA/nvidia-docker)
     - [depo-国人一站式深度学习docker仓库](https://hub.docker.com/r/ufoym/deepo)
-- 保存及备份操作:
 
 # 参考
 

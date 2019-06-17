@@ -7,21 +7,11 @@ archives: "2019-06"
 ---
 微软SPTAG向量搜索工具工程化构建总结。
 
-## 流程
-
-- 构建流程及指标： 
-    - 构建流程： 句子 -> Bert句向量 -> Sptag构建空间向量搜索图
-    - 训练时间参考： 原始200W数据， 因为目前Sptag仅支持单核CPU构建的情况，训练时间约24h
-- 搜素流程及指标：
-    - 句子 -> Bert句向量： 60ms，基于cpu， 可以使用GPu并行加速获取句向量
-    - Bert句向量 -> Sptag空间向量搜索： 40ms
-    
-
 ## Spatg
 
 ### 1.概述
 
-微软官方在Github 开源的大规模最近邻向量搜索库， [Sptag](https://github.com/microsoft/SPTAG)github地址。
+微软官方在Github 开源的大规模最近邻向量搜索库， [Sptag Github](https://github.com/microsoft/SPTAG)。
 - 主要流程： 样本->转化为向量->根据样本向量构建KDT图
 - 提供构建方法：
     - SPTAG-KDT：优势在于索引构建花费较低
@@ -67,64 +57,83 @@ archives: "2019-06"
     - pip install bert-serving-client： Python端Client，获取句向量
     - pip install -U bert-serving-server[http]： 如果需要将Bert句向量服务提供http请求的方式，需要安装该依赖（基于flask框架，提供一个单进程的http服务，如果对并发有要求还是最好自己去封装吧）
 - 支持http请求版本：
-    - bert-serving-start -model_dir=/YOUR_MODEL -http_port 8125
+    - bert-serving-start -model_dir=/YOUR_MODEL -http_port 8125： 直接指定端口运行
+    - post数据格式： **上传数据有部分内容为数据，需要以json形式post
+    ```
+    curl -X POST http://server38.raisound.com:25004/encode \
+       -H 'content-type: application/json' \
+       -d '{"id": 123,"texts": ["hello world"], "is_tokenized": false}'
+    ```
+
 - 多线程版本：
     - 设置基于cpu提供Bert句向量
     - 设置并发数为：10
     - 对外端口为： 5555
-```python
-# -*- coding: utf-8 -*-
-# @Time  : 6/12/19 10:03 AM
-# @Author : zhongzhaochang
-# @Project : bert
-# @Desc : 开启bert服务， 对外提供句子转bert向量
-import os
 
-from bert_serving.server.helper import get_args_parser
-from bert_serving.server import BertServer
+    ```python
+    # -*- coding: utf-8 -*-
+    # @Time  : 6/12/19 10:03 AM
+    # @Author : zhongzhaochang
+    # @Project : bert
+    # @Desc : 开启bert服务， 对外提供句子转bert向量
+    import os
+    
+    from bert_serving.server.helper import get_args_parser
+    from bert_serving.server import BertServer
+    
+    
+    cur_dir = os.path.dirname(os.path.realpath(__file__))
+    model_dir = os.path.join(cur_dir, "models")
+    
+    bert_model = os.path.join(model_dir, "chinese_L-12_H-768_A-12")
+    
+    # start： python bert_service.py
+    # stop: bert-serving-terminate -port 5555(or 你指定监听客户端的端口)
+    args = get_args_parser().parse_args(['-model_dir', bert_model,
+                                         '-port', '5555',
+                                         '-port_out', '5556',
+                                         '-max_seq_len', 'NONE',
+                                         '-mask_cls_sep',
+                                         '-cpu',
+                                         '-num_worker', '10'])
+    server = BertServer(args)
+    server.start()
 
+    ```
+    - **client获取句向量主要代码**
 
-cur_dir = os.path.dirname(os.path.realpath(__file__))
-model_dir = os.path.join(cur_dir, "models")
-
-bert_model = os.path.join(model_dir, "chinese_L-12_H-768_A-12")
-
-# start： python bert_service.py
-# stop: bert-serving-terminate -port 5555(or 你指定监听客户端的端口)
-args = get_args_parser().parse_args(['-model_dir', bert_model,
-                                     '-port', '5555',
-                                     '-port_out', '5556',
-                                     '-max_seq_len', 'NONE',
-                                     '-mask_cls_sep',
-                                     '-cpu',
-                                     '-num_worker', '10'])
-server = BertServer(args)
-server.start()
+    ```python
+    # -*- coding: utf-8 -*-
+    # @Time  : 6/11/19 6:34 PM
+    # @Author : zhongzhaochang
+    # @Project : bert
+    # @Desc : 简单bert_client 获取句向量代码
+    from bert_serving.client import BertClient
+    
+    
+    def get_vector_by_bert_client():
+    
+    
+        bc = BertClient(ip="127.0.0.1", port=5555)
+        while True:
+            question = input("input sentence:\n")
+            vectors = bc.encode([question])
+            print(str(vectors), vectors.shape)
+    
+    
+    if __name__ == '__main__':
+        get_vector_by_bert_client()
 
 ```
-```python
-# -*- coding: utf-8 -*-
-# @Time  : 6/11/19 6:34 PM
-# @Author : zhongzhaochang
-# @Project : bert
-# @Desc : 简单bert_client 获取句向量代码
-from bert_serving.client import BertClient
 
+## 流程
 
-def get_vector_by_bert_client():
-
-
-    bc = BertClient(ip="127.0.0.1", port=5555)
-    while True:
-        question = input("input sentence:\n")
-        vectors = bc.encode([question])
-        print(str(vectors), vectors.shape)
-
-
-if __name__ == '__main__':
-    get_vector_by_bert_client()
-
-```
+- 构建流程及指标： 
+    - 构建流程： 句子 -> Bert句向量 -> Sptag构建空间向量搜索图
+    - 训练时间参考： 原始200W数据， 因为目前Sptag仅支持单核CPU构建的情况，训练时间约24h
+- 搜素流程及指标：
+    - 句子 -> Bert句向量： 60ms，基于cpu， 可以使用GPu并行加速获取句向量
+    - Bert句向量 -> Sptag空间向量搜索： 40ms
 
 #### issue：
 - 启动Bert model模型时，可能会出现该问题：
